@@ -35,6 +35,7 @@
 5. **添加密钥**:
    - Name: `TOKEN`
    - Secret: 粘贴你获取的 `account_token` 值
+   - **多账户支持**: 如需暂停多个账户，用英文逗号分隔多个token，例如：`token1,token2,token3`
 6. **点击 Add secret 保存**
 
 ### 4. 运行GitHub Action
@@ -83,10 +84,16 @@ cd leishen-auto
 
 ```bash
 # Windows (PowerShell)
+# 单账户
 $env:TOKEN="your_account_token_here"
+# 多账户（用英文逗号分隔）
+$env:TOKEN="token1,token2,token3"
 
 # Linux/macOS
+# 单账户
 export TOKEN="your_account_token_here"
+# 多账户（用英文逗号分隔）
+export TOKEN="token1,token2,token3"
 ```
 
 ### 3. 运行程序
@@ -99,7 +106,8 @@ go run main.go
 ## 功能特性
 
 - 🌀 自动暂停雷神加速器
-- 🔄 支持重复操作检测（错误码400803）
+- � 支持单/多账户批量暂停
+- �🔄 支持重复操作检测（错误码400803）
 - 🎯 简洁的命令行输出
 - 📦 模块化代码结构
 - ⚡ 高性能Go语言实现
@@ -133,6 +141,9 @@ A: 编辑 `.github/workflows/auto-pause.yml` 文件中的 cron 表达式。例�
 
 ### Q: TOKEN在哪里获取？
 A: 登录雷神加速器官网，打开浏览器开发者工具，在Network面板中查看任意请求的 `account_token` 参数。
+
+### Q: 如何配置多个账户？
+A: 在TOKEN中用英文逗号分隔多个账户的token，例如：`token1,token2,token3`。程序会依次暂停所有账户，并在最后显示成功/失败统计。
 
 ### Q: 如何查看运行日志？
 A: 在GitHub仓库的Actions标签页中，点击对应的工作流运行记录即可查看详细日志。
